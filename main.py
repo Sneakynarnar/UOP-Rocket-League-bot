@@ -62,12 +62,12 @@ async def on_component(ctx):
         role = await guild.get_role(1123454958377906226)
 
         if role.id in ctx.author.roles:
-            await ctx.author.remove_role(role=role, guild_id=819358157569916949)
+            await ctx.author.remove_role(role=role, guild_id=GUILD_ID)
             
             await ctx.send(f"{role.name} role removed!", ephemeral=True) 
             return
 
-        await ctx.author.add_role(role=role, guild_id=819358157569916949)
+        await ctx.author.add_role(role=role, guild_id=GUILD_ID)
         await ctx.send(f"{role.name} role applied!", ephemeral=True)
   except Exception as e:
       await ctx.send(f"There was an error managing roles\n({e}) customId: {ctx.custom_id}", ephemeral=True)
