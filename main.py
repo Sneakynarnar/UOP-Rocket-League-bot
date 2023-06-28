@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 GUILD_ID = 1123417784886497302
 WELCOME_CHANNEL = 1123423381132423219
+LEAVE_CHANNEL = 1123428819852857345
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD_ID =  1123417784886497302
 #GUILD_ID = 819358157569916949
@@ -26,7 +27,7 @@ async def on_guild_member_add(member):
 
 @bot.event(name="on_guild_member_remove")
 async def on_guild_member_remove(member):
-    channel = await get(bot, interactions.Channel, object_id=1015061937727484055)
+    channel = await get(bot, interactions.Channel, object_id=LEAVE_CHANNEL)
     
     await channel.send(f"**{member.username}** has left the server.") 
 @bot.command(name="sendbuttons", scope=GUILD_ID,)
@@ -40,7 +41,7 @@ async def sendButtons(ctx: interactions.CommandContext):
                 interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="6 mans ping", custom_id="6mans")#
 
     ]
-    await ctx.channel.send(content="Select your peak rank in competitive playlists", components=[ActionRow(components=buttons)])
+    await ctx.channel.send(content="Click to get the role!", components=[ActionRow(components=buttons)])
     await ctx.send("Buttons sent!", ephemeral=True)
 
 
