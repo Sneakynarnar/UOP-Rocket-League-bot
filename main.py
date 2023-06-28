@@ -29,10 +29,10 @@ async def on_guild_member_remove(member):
     channel = await get(bot, interactions.Channel, object_id=1015061937727484055)
     
     await channel.send(f"**{member.username}** has left the server.") 
-@bot.command(name="sendbuttons", scope=GUILD_ID)
+@bot.command(name="sendbuttons", scope=GUILD_ID,)
 async def sendButtons(ctx: interactions.CommandContext):
     channel = ctx.channel
-    message = await channel.get_message(1063432347011260538)
+
     
     buttons = [interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="Spoons", custom_id="spoons"),
                interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="2 mans ping", custom_id="2mans"),
@@ -40,7 +40,8 @@ async def sendButtons(ctx: interactions.CommandContext):
                 interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="6 mans ping", custom_id="6mans")#
 
     ]
-    await message.edit(content="Select your peak rank in competitive playlists", components=[ActionRow(components=buttons), ActionRow(components=buttons2)])
+    await ctx.channel.send(content="Select your peak rank in competitive playlists", components=[ActionRow(components=buttons)])
+    await ctx.send("Buttons sent!", ephemeral=True)
 
 
 
