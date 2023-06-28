@@ -70,4 +70,4 @@ async def on_component(ctx):
   except Exception as e:
       await ctx.send(f"There was an error managing roles\n({e}) customId: {ctx.custom_id}", ephemeral=True)
     
-bot.start(TOKEN)
+bot.start()
