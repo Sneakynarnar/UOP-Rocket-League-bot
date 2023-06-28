@@ -50,16 +50,16 @@ async def sendButtons(ctx: interactions.CommandContext):
 async def on_component(ctx):
   try:
     if ctx.custom_id == "4mans":
-        role = await guild.get_role(1060976014894829610)
+        role = await guild.get_role(1123454868452016178)
     
     elif ctx.custom_id == "6mans":
-        role = await guild.get_role(1060976010281103420)
+        role = await guild.get_role(1123454904334307348)
     
     elif ctx.custom_id == "2mans":
-        role = await guild.get_role(1060975587885318254)
+        role = await guild.get_role(1123454808750293032)
     
     elif ctx.custom_id == "spoons":
-        role = await guild.get_role(1060974547366588557)
+        role = await guild.get_role(1123454958377906226)
 
         if role.id in ctx.author.roles:
             await ctx.author.remove_role(role=role, guild_id=819358157569916949)
