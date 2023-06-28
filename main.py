@@ -36,9 +36,9 @@ async def sendButtons(ctx: interactions.CommandContext):
 
     
     buttons = [interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="Spoons", custom_id="spoons"),
-               interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="2 mans ping", custom_id="2mans"),
-               interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="4 mans ping", custom_id="4mans"),
-                interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="6 mans ping", custom_id="6mans")#
+               interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="2 mans ping", custom_id="2"),
+               interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="4 mans ping", custom_id="4m"),
+                interactions.Button(style=interactions.ButtonStyle.SUCCESS, label="6 mans ping", custom_id="6")#
 
     ]
     await ctx.channel.send(content="Click to get the role!", components=[ActionRow(components=buttons)])
@@ -49,26 +49,27 @@ async def sendButtons(ctx: interactions.CommandContext):
 @bot.event()
 async def on_component(ctx):
   try:
-    if ctx.custom_id == "4mans":
+    print(ctx.custom_id)
+    if ctx.custom_id == "4":
         role = await guild.get_role(1123454868452016178)
     
-    elif ctx.custom_id == "6mans":
+    elif ctx.custom_id == "6":
         role = await guild.get_role(1123454904334307348)
     
-    elif ctx.custom_id == "2mans":
+    elif ctx.custom_id == "2":
         role = await guild.get_role(1123454808750293032)
     
     elif ctx.custom_id == "spoons":
         role = await guild.get_role(1123454958377906226)
 
-        if role.id in ctx.author.roles:
-            await ctx.author.remove_role(role=role, guild_id=GUILD_ID)
-            
-            await ctx.send(f"{role.name} role removed!", ephemeral=True) 
-            return
+    if role.id in ctx.author.roles:
+        await ctx.author.remove_role(role=role, guild_id=GUILD_ID)
+        
+        await ctx.send(f"{role.name} role removed!", ephemeral=True) 
+        return
 
-        await ctx.author.add_role(role=role, guild_id=GUILD_ID)
-        await ctx.send(f"{role.name} role applied!", ephemeral=True)
+    await ctx.author.add_role(role=role, guild_id=GUILD_ID)
+    await ctx.send(f"{role.name} role added!", ephemeral=True)
   except Exception as e:
       await ctx.send(f"There was an error managing roles\n({e}) customId: {ctx.custom_id}", ephemeral=True)
     
